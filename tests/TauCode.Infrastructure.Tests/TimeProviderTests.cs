@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Threading;
+using NUnit.Framework;
 
-namespace TauCode.Infrastructure.Test
+namespace TauCode.Infrastructure.Tests
 {
     [TestFixture]
-    public class TimeProviderTest
+    public class TimeProviderTests
     {
         [SetUp]
         public void SetUp()
