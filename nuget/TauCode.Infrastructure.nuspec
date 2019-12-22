@@ -8,7 +8,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE.txt</license>
     <projectUrl>https://github.com/taucode/taucode.infrastructure</projectUrl>
-    <description>TauCode infrastructure</description>
+    <description>TauCode infrastructure library</description>
     <releaseNotes>
       Moving to nuget.org
     </releaseNotes>
