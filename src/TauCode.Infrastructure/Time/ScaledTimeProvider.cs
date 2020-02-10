@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace TauCode.Infrastructure
+namespace TauCode.Infrastructure.Time
 {
     public class ScaledTimeProvider : ITimeProvider
     {
