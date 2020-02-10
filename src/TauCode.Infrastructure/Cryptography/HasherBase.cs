@@ -237,25 +237,5 @@ namespace TauCode.Infrastructure.Cryptography
         public Guid GetHashGuid(Stream stream) => LeadingBytesToGuid(this.GetHash(stream));
 
         #endregion
-
-        //public Guid GetHash(string s)
-        //{
-        //    if (s == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(s));
-        //    }
-
-        //    using (HashAlgorithm algorithm = SHA256.Create())
-        //    {
-        //        var eee = s + _salt;
-
-        //        var bytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(s + _salt));
-        //        var guidBytes = new byte[16];
-        //        Array.Copy(bytes, 0, guidBytes, 0, 16);
-
-        //        var guid = new Guid(guidBytes);
-        //        return guid;
-        //    }
-        //}
     }
 }
