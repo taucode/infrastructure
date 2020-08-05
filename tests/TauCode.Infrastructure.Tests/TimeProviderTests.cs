@@ -1,6 +1,7 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Threading;
-using NUnit.Framework;
+using TauCode.Infrastructure.Time;
 
 namespace TauCode.Infrastructure.Tests
 {
