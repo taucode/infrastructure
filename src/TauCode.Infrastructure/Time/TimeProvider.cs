@@ -5,17 +5,17 @@ namespace TauCode.Infrastructure.Time
     public static class TimeProvider
     {
         private static ITimeProvider _current;
-        private static readonly object _lock;
+        private static readonly object Lock;
 
         static TimeProvider()
         {
-            _lock = new object();
+            Lock = new object();
             Reset();
         }
 
-        public static DateTime GetCurrent()
+        public static DateTimeOffset GetCurrent()
         {
-            lock (_lock)
+            lock (Lock)
             {
                 return _current.GetCurrent();
             }
@@ -23,20 +23,20 @@ namespace TauCode.Infrastructure.Time
 
         public static void Override(ITimeProvider timeProvider)
         {
-            lock (_lock)
+            lock (Lock)
             {
                 _current = timeProvider;
             }
         }
 
-        public static void Override(DateTime dateTime)
+        public static void Override(DateTimeOffset moment)
         {
-            Override(new ConstTimeProvider(dateTime));
+            Override(new ConstTimeProvider(moment));
         }
 
         public static void Reset()
         {
-            lock (_lock)
+            lock (Lock)
             {
                 _current = new UtcTimeProvider();
             }

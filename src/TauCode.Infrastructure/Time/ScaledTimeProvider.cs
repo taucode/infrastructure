@@ -5,18 +5,18 @@ namespace TauCode.Infrastructure.Time
 {
     public class ScaledTimeProvider : ITimeProvider
     {
-        private readonly DateTime _initial;
+        private readonly DateTimeOffset _initial;
         private readonly double _scale;
         private readonly Stopwatch _stopwatch;
 
-        public ScaledTimeProvider(DateTime? initial = null, double scale = 1.0)
+        public ScaledTimeProvider(DateTimeOffset? initial = null, double scale = 1.0)
         {
             _stopwatch = Stopwatch.StartNew();
-            _initial = (initial ?? DateTime.UtcNow);
+            _initial = (initial ?? DateTimeOffset.UtcNow);
             _scale = scale;
         }
 
-        public DateTime GetCurrent()
+        public DateTimeOffset GetCurrent()
         {
             var elapsedMilliseconds = _stopwatch.ElapsedMilliseconds;
             var scaleElapsed = _scale * elapsedMilliseconds;
