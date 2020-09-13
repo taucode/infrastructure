@@ -4,6 +4,6 @@ namespace TauCode.Infrastructure.Time
 {
     public interface ITimeProvider
     {
-        DateTime GetCurrent();
+        DateTimeOffset GetCurrent();
     }
 }

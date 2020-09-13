@@ -11,6 +11,9 @@ namespace TauCode.Infrastructure.Time
 
         public TimeSpan Shift { get; }
 
-        public DateTime GetCurrent() => DateTime.UtcNow + this.Shift;
+        public DateTimeOffset GetCurrent() => DateTimeOffset.UtcNow + this.Shift;
+
+        public static ShiftedTimeProvider CreateTimeMachine(DateTimeOffset fakeNow) =>
+            new ShiftedTimeProvider(fakeNow - DateTimeOffset.UtcNow);
     }
 }
