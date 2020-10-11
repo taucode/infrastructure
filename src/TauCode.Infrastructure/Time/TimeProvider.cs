@@ -13,11 +13,19 @@ namespace TauCode.Infrastructure.Time
             Reset();
         }
 
-        public static DateTimeOffset GetCurrent()
+        public static DateTimeOffset GetCurrentTime()
         {
             lock (Lock)
             {
-                return _current.GetCurrent();
+                return _current.GetCurrentTime();
+            }
+        }
+
+        public static DateTimeOffset GetCurrentDate()
+        {
+            lock (Lock)
+            {
+                return _current.GetCurrentDate();
             }
         }
 
@@ -25,21 +33,28 @@ namespace TauCode.Infrastructure.Time
         {
             lock (Lock)
             {
-                _current = timeProvider;
+                _current = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
             }
         }
 
-        public static void Override(DateTimeOffset moment)
-        {
-            Override(new ConstTimeProvider(moment));
-        }
+        public static void Override(DateTimeOffset moment) => Override(new ConstTimeProvider(moment));
 
-        public static void Reset()
+        public static void Override(string momentString, bool checkUtc = true)
         {
-            lock (Lock)
+            if (momentString == null)
             {
-                _current = new UtcTimeProvider();
+                throw new ArgumentNullException(nameof(momentString));
             }
+
+            var moment = DateTimeOffset.Parse(momentString);
+            if (moment.Offset != TimeSpan.Zero && checkUtc)
+            {
+                throw new ArgumentException($"'{momentString}' does not represent UTC date and time.");
+            }
+
+            Override(moment);
         }
+
+        public static void Reset() => Override(UtcTimeProvider.Instance);
     }
 }

@@ -23,7 +23,7 @@ namespace TauCode.Infrastructure.Tests
             await Task.Delay(timeout);
 
             // Assert
-            var fakeNow = TimeProvider.GetCurrent();
+            var fakeNow = TimeProvider.GetCurrentTime();
             var tolerance = TimeSpan.FromMilliseconds(20);
             Assert.That(fakeNow, Is.EqualTo(past.Add(timeout)).Within(tolerance));
         }

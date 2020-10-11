@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace TauCode.Infrastructure.Time
 {
-    public class ScaledTimeProvider : ITimeProvider
+    public class ScaledTimeProvider : TimeProviderBase
     {
         private readonly DateTimeOffset _initial;
         private readonly double _scale;
@@ -16,7 +16,7 @@ namespace TauCode.Infrastructure.Time
             _scale = scale;
         }
 
-        public DateTimeOffset GetCurrent()
+        public override DateTimeOffset GetCurrentTime()
         {
             var elapsedMilliseconds = _stopwatch.ElapsedMilliseconds;
             var scaleElapsed = _scale * elapsedMilliseconds;

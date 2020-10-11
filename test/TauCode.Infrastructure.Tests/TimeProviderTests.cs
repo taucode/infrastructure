@@ -28,7 +28,7 @@ namespace TauCode.Infrastructure.Tests
             var utc = DateTimeOffset.UtcNow;
 
             // Act
-            var timeProviderCurrent = TimeProvider.GetCurrent();
+            var timeProviderCurrent = TimeProvider.GetCurrentTime();
 
             // Assert
             Assert.That(timeProviderCurrent, Is.EqualTo(utc).Within(TimeSpan.FromMilliseconds(50)));
@@ -42,7 +42,7 @@ namespace TauCode.Infrastructure.Tests
 
             // Act
             TimeProvider.Override(moment);
-            var current = TimeProvider.GetCurrent();
+            var current = TimeProvider.GetCurrentTime();
 
             // Assert
             Assert.That(current, Is.EqualTo(moment));
@@ -57,7 +57,7 @@ namespace TauCode.Infrastructure.Tests
 
             // Act
             TimeProvider.Override(provider);
-            var current = TimeProvider.GetCurrent();
+            var current = TimeProvider.GetCurrentTime();
 
             // Assert
             Assert.That(current, Is.EqualTo(moment));
@@ -72,7 +72,7 @@ namespace TauCode.Infrastructure.Tests
             // Act
             TimeProvider.Override(moment);
             TimeProvider.Reset();
-            var current = TimeProvider.GetCurrent();
+            var current = TimeProvider.GetCurrentTime();
             var utc = DateTimeOffset.UtcNow;
 
             // Assert
@@ -97,10 +97,10 @@ namespace TauCode.Infrastructure.Tests
             await Task.Delay(seconds * 1000);
 
             TimeProvider.Override(timeProvider1);
-            var time1 = TimeProvider.GetCurrent();
+            var time1 = TimeProvider.GetCurrentTime();
 
             TimeProvider.Override(timeProvider2);
-            var time2 = TimeProvider.GetCurrent();
+            var time2 = TimeProvider.GetCurrentTime();
 
             // Assert
             // effect is +/- 10 minutes
@@ -117,7 +117,7 @@ namespace TauCode.Infrastructure.Tests
 
             // Act
             TimeProvider.Override(shifted);
-            var time = TimeProvider.GetCurrent();
+            var time = TimeProvider.GetCurrentTime();
             var utc = DateTimeOffset.UtcNow;
 
             // Assert
