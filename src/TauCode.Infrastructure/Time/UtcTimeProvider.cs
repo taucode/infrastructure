@@ -2,8 +2,14 @@
 
 namespace TauCode.Infrastructure.Time
 {
-    public class UtcTimeProvider : ITimeProvider
+    public class UtcTimeProvider : TimeProviderBase
     {
-        public DateTimeOffset GetCurrent() => DateTimeOffset.UtcNow;
+        public static UtcTimeProvider Instance = new UtcTimeProvider();
+
+        private UtcTimeProvider()
+        {
+        }
+
+        public override DateTimeOffset GetCurrentTime() => DateTimeOffset.UtcNow;
     }
 }

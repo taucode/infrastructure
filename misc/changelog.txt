@@ -10,3 +10,8 @@
 ==========
     Version 3.0.0.1
     1. Updated project structure.
+
+2020-10-11
+==========
+    1. Version is changed to 1.3.2-dev-* (Now hosting at Azure DevOps and NuGet.org)
+    2. Complete refactoring of TauCode libs touched this project, too.

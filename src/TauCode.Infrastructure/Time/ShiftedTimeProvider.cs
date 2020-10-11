@@ -2,7 +2,7 @@
 
 namespace TauCode.Infrastructure.Time
 {
-    public class ShiftedTimeProvider : ITimeProvider
+    public class ShiftedTimeProvider : TimeProviderBase
     {
         public ShiftedTimeProvider(TimeSpan shift)
         {
@@ -11,7 +11,7 @@ namespace TauCode.Infrastructure.Time
 
         public TimeSpan Shift { get; }
 
-        public DateTimeOffset GetCurrent() => DateTimeOffset.UtcNow + this.Shift;
+        public override DateTimeOffset GetCurrentTime() => DateTimeOffset.UtcNow + this.Shift;
 
         public static ShiftedTimeProvider CreateTimeMachine(DateTimeOffset fakeNow) =>
             new ShiftedTimeProvider(fakeNow - DateTimeOffset.UtcNow);
