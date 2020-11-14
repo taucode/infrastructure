@@ -1,3 +1,7 @@
 2020-10-11
 ==========
     1. Handy time machine for debugging.
+
+2020-11-14
+==========
+    1. Huge dev refactoring.
