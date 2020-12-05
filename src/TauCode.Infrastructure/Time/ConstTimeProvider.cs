@@ -2,21 +2,15 @@
 
 namespace TauCode.Infrastructure.Time
 {
-    public class ConstTimeProvider : ITimeProvider
+    public class ConstTimeProvider : TimeProviderBase
     {
-        private readonly DateTime _dateTime;
+        private readonly DateTimeOffset _moment;
 
-        public ConstTimeProvider(DateTime dateTime)
+        public ConstTimeProvider(DateTimeOffset moment)
         {
-            _dateTime = dateTime;
+            _moment = moment.ToUniversalTime();
         }
 
-        public ConstTimeProvider()
-            : this(DateTime.UtcNow)
-        {
-
-        }
-
-        public DateTime GetCurrent() => _dateTime;
+        public override DateTimeOffset GetCurrentTime() => _moment;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Threading;
+using System.Threading.Tasks;
 using TauCode.Infrastructure.Time;
 
 namespace TauCode.Infrastructure.Tests
@@ -12,6 +12,7 @@ namespace TauCode.Infrastructure.Tests
         public void SetUp()
         {
             // idle
+            TimeProvider.Reset();
         }
 
         [TearDown]
@@ -24,87 +25,87 @@ namespace TauCode.Infrastructure.Tests
         public void TimeProvider_GetCurrent_ReturnsUtcNow()
         {
             // Arrange
-            var utcNow = DateTime.UtcNow;
+            var utc = DateTimeOffset.UtcNow;
 
             // Act
-            var timeProviderCurrent = TimeProvider.GetCurrent();
+            var timeProviderCurrent = TimeProvider.GetCurrentTime();
 
             // Assert
-            Assert.That(timeProviderCurrent, Is.EqualTo(utcNow).Within(TimeSpan.FromMilliseconds(50)));
+            Assert.That(timeProviderCurrent, Is.EqualTo(utc).Within(TimeSpan.FromMilliseconds(50)));
         }
 
         [Test]
         public void TimeProvider_OverrideWithTime_Overrides()
         {
             // Arrange
-            var dateTime = new DateTime(2018, 12, 23, 1, 2, 3);
+            var moment = new DateTimeOffset(2018, 12, 23, 1, 2, 3, TimeSpan.Zero);
 
             // Act
-            TimeProvider.Override(dateTime);
-            var current = TimeProvider.GetCurrent();
+            TimeProvider.Override(moment);
+            var current = TimeProvider.GetCurrentTime();
 
             // Assert
-            Assert.That(current, Is.EqualTo(dateTime));
+            Assert.That(current, Is.EqualTo(moment));
         }
 
         [Test]
         public void TimeProvider_OverrideWithTimeProvider_Overrides()
         {
             // Arrange
-            var dateTime = new DateTime(2018, 12, 23, 1, 2, 3);
-            var provider = new ConstTimeProvider(dateTime);
+            var moment = new DateTimeOffset(2018, 12, 23, 1, 2, 3, TimeSpan.Zero);
+            var provider = new ConstTimeProvider(moment);
 
             // Act
             TimeProvider.Override(provider);
-            var current = TimeProvider.GetCurrent();
+            var current = TimeProvider.GetCurrentTime();
 
             // Assert
-            Assert.That(current, Is.EqualTo(dateTime));
+            Assert.That(current, Is.EqualTo(moment));
         }
 
         [Test]
         public void TimeProvider_Reset_Resets()
         {
             // Arrange
-            var dateTime = new DateTime(2018, 12, 23, 1, 2, 3);
+            var moment = new DateTimeOffset(2018, 12, 23, 1, 2, 3, TimeSpan.Zero);
 
             // Act
-            TimeProvider.Override(dateTime);
+            TimeProvider.Override(moment);
             TimeProvider.Reset();
-            var current = TimeProvider.GetCurrent();
-            var utcNow = DateTime.UtcNow;
+            var current = TimeProvider.GetCurrentTime();
+            var utc = DateTimeOffset.UtcNow;
 
             // Assert
-            Assert.That(current, Is.EqualTo(utcNow).Within(TimeSpan.FromMilliseconds(50)));
+            Assert.That(current, Is.EqualTo(utc).Within(TimeSpan.FromMilliseconds(50)));
         }
 
         [Test]
-        public void TimeProvider_ScaledTimeProvider_Scales()
+        public async Task TimeProvider_ScaledTimeProvider_Scales()
         {
             // Arrange
-            var dateTime = new DateTime(2018, 12, 23, 10, 0, 0);
+            var moment = new DateTimeOffset(2018, 12, 23, 10, 0, 0, TimeSpan.Zero);
 
             var scale = 60; // one second becomes one minute
 
-            var timeProvider1 = new ScaledTimeProvider(dateTime, +scale);
-            var timeProvider2 = new ScaledTimeProvider(dateTime, -scale);
+            var timeProvider1 = new ScaledTimeProvider(moment, +scale);
+            var timeProvider2 = new ScaledTimeProvider(moment, -scale);
 
             var seconds = 10;
-            var tolerance = 100;
+            var tolerance = 200;
 
             // Act
-            Thread.Sleep(seconds * 1000);
+            await Task.Delay(seconds * 1000);
 
             TimeProvider.Override(timeProvider1);
-            var time1 = TimeProvider.GetCurrent();
+            var time1 = TimeProvider.GetCurrentTime();
 
             TimeProvider.Override(timeProvider2);
-            var time2 = TimeProvider.GetCurrent();
+            var time2 = TimeProvider.GetCurrentTime();
 
             // Assert
             // effect is +/- 10 minutes
-            Assert.That(time1, Is.EqualTo(dateTime.AddMinutes(seconds)).Within(TimeSpan.FromMilliseconds(seconds * tolerance)));
-            Assert.That(time2, Is.EqualTo(dateTime.AddMinutes(-seconds)).Within(TimeSpan.FromMilliseconds(seconds * tolerance)));
+            Assert.That(time1, Is.EqualTo(moment.AddMinutes(seconds)).Within(TimeSpan.FromMilliseconds(seconds * tolerance)));
+            Assert.That(time2, Is.EqualTo(moment.AddMinutes(-seconds)).Within(TimeSpan.FromMilliseconds(seconds * tolerance)));
         }
 
         [Test]
@@ -116,11 +117,12 @@ namespace TauCode.Infrastructure.Tests
 
             // Act
             TimeProvider.Override(shifted);
-            var time = TimeProvider.GetCurrent();
-            var utcNow = DateTime.UtcNow;
+            var time = TimeProvider.GetCurrentTime();
+            var utc = DateTimeOffset.UtcNow;
 
             // Assert
-            Assert.That(time, Is.EqualTo(utcNow.Add(shift)).Within(TimeSpan.FromMilliseconds(100)));
+            Assert.That(time, Is.EqualTo(utc.Add(shift)).Within(TimeSpan.FromMilliseconds(100)));
         }
+
     }
 }
