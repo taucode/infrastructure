@@ -19,3 +19,7 @@
 2021-03-01
 ==========
     1. Resurrection.
+
+2021-03-29
+==========
+    1. Added logging and time machine.
