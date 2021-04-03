@@ -39,10 +39,17 @@ namespace TauCode.Infrastructure.Logging
             var timeStamp = TimeProvider.GetCurrentTime();
             var timeStampString = timeStamp.ToString("yyyy-MM-dd HH:mm:ss+00:00");
             var message = formatter(state, exception);
-            var exceptionString = exception == null ? "" : exception.StackTrace;
+            var exceptionString = exception?.ToString();
 
-            var logRecord = $"[{timeStampString}] [{logLevel}] {message} {exceptionString}";
-            _stringBuilder.AppendLine(logRecord);
+            _stringBuilder.Append($"[{timeStampString}] [{logLevel}] {message}");
+
+            if (exceptionString != null)
+            {
+                _stringBuilder.AppendLine();
+                _stringBuilder.Append(exceptionString);
+            }
+
+            _stringBuilder.AppendLine();
         }
 
         public override string ToString() => _stringBuilder.ToString();
