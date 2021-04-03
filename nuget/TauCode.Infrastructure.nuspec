@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Infrastructure</id>
-    <version>1.3.2.7-dev-2021-03-29-19-00</version>
+    <version>1.3.2.7-dev-2021-04-03-09-16</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/taucode/taucode.infrastructure</projectUrl>
     <description>TauCode infrastructure library</description>
     <releaseNotes>
-      Added logging and time machine.
+      Small improvements to StringLogger.
     </releaseNotes>
     <tags>taucode infrastructure</tags>
     <dependencies>

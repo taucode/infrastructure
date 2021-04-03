@@ -23,3 +23,7 @@
 2021-03-29
 ==========
     1. Added logging and time machine.
+
+2021-03-29
+==========
+    1. Small improvements to StringLogger.
