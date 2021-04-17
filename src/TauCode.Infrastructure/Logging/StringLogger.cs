@@ -48,8 +48,6 @@ namespace TauCode.Infrastructure.Logging
                 _stringBuilder.AppendLine();
                 _stringBuilder.Append(exceptionString);
             }
-
-            _stringBuilder.AppendLine();
         }
 
         public override string ToString() => _stringBuilder.ToString();
