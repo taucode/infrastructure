@@ -13,6 +13,7 @@ namespace TauCode.Infrastructure.Time
 
         public override DateTimeOffset GetCurrentTime() => DateTimeOffset.UtcNow + this.Shift;
 
+// todo: this is confusing. we have TimeMachineTimeProvider.cs now.
         public static ShiftedTimeProvider CreateTimeMachine(DateTimeOffset fakeNow) =>
             new ShiftedTimeProvider(fakeNow - DateTimeOffset.UtcNow);
     }
