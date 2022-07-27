@@ -2,25 +2,26 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Infrastructure</id>
-    <version>1.3.2.7-dev-2021-04-17-19-18</version>
+    <version>1.3.7-alpha.1.2022-07-27.22-34</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="file">LICENSE.txt</license>
+    <license type="file">LICENSE</license>
     <projectUrl>https://github.com/taucode/taucode.infrastructure</projectUrl>
+    <repository type="git" url="https://github.com/taucode/taucode.infrastructure"/>
     <description>TauCode infrastructure library</description>
     <releaseNotes>
-      Small improvements to StringLogger.
+      Developing release 1.3.7.
     </releaseNotes>
-    <tags>taucode infrastructure</tags>
+    <tags>taucode infrastructure time mocking hasher</tags>
     <dependencies>
       <group targetFramework=".NETStandard2.1">
-        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="5.0.0" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\LICENSE.txt" target="" />
+    <file src="..\LICENSE*" target="" />
     <file src="..\src\TauCode.Infrastructure\bin\Release\netstandard2.1\TauCode.Infrastructure.dll" target="lib\netstandard2.1" />
     <file src="..\src\TauCode.Infrastructure\bin\Release\netstandard2.1\TauCode.Infrastructure.pdb" target="lib\netstandard2.1" />
   </files>
