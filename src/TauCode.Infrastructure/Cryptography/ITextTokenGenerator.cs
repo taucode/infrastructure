@@ -1,7 +1,6 @@
-﻿namespace TauCode.Infrastructure.Cryptography
+﻿namespace TauCode.Infrastructure.Cryptography;
+
+public interface ITextTokenGenerator
 {
-    public interface ITextTokenGenerator
-    {
-        string Generate(int length);
-    }
+    string Generate(int length);
 }

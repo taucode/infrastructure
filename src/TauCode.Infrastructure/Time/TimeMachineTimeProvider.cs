@@ -1,77 +1,72 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace TauCode.Infrastructure.Time;
 
-namespace TauCode.Infrastructure.Time
+public class TimeMachineTimeProvider : ShiftedTimeProvider
 {
-    public class TimeMachineTimeProvider : ShiftedTimeProvider
+    public TimeMachineTimeProvider(DateTimeOffset @base)
+        : base(@base - DateTimeOffset.UtcNow)
     {
-        public TimeMachineTimeProvider(DateTimeOffset @base)
-            : base(@base - DateTimeOffset.UtcNow)
+        this.Base = @base;
+    }
+
+    public DateTimeOffset Base { get; }
+
+    public async Task<bool> WaitUntil(
+        DateTimeOffset fakeUntil,
+        CancellationToken cancellationToken = default)
+    {
+        if (fakeUntil <= this.Base)
         {
-            this.Base = @base;
+            throw new ArgumentException("Cannot wait for fake past.", nameof(fakeUntil));
         }
 
-        public DateTimeOffset Base { get; }
-
-        public async Task<bool> WaitUntil(
-            DateTimeOffset fakeUntil,
-            CancellationToken cancellationToken = default)
+        try
         {
-            if (fakeUntil <= this.Base)
+            while (true)
             {
-                throw new ArgumentException("Cannot wait for fake past.", nameof(fakeUntil));
-            }
+                await Task.Delay(1, cancellationToken);
 
-            try
-            {
-                while (true)
+                if (this.GetCurrentTime() >= fakeUntil)
                 {
-                    await Task.Delay(1, cancellationToken);
-
-                    if (this.GetCurrentTime() >= fakeUntil)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-            }
-            catch (OperationCanceledException)
-            {
-                return false;
             }
         }
-
-        public async Task<bool> WaitUntilElapsed(
-            TimeSpan timeout,
-            CancellationToken token = default)
+        catch (OperationCanceledException)
         {
-            var now = this.GetCurrentTime();
+            return false;
+        }
+    }
 
-            var elapsed = now - this.Base;
-            if (elapsed >= timeout)
-            {
-                throw new InvalidOperationException("Too late.");
-            }
+    public async Task<bool> WaitUntilElapsed(
+        TimeSpan timeout,
+        CancellationToken token = default)
+    {
+        var now = this.GetCurrentTime();
 
-            try
+        var elapsed = now - this.Base;
+        if (elapsed >= timeout)
+        {
+            throw new InvalidOperationException("Too late.");
+        }
+
+        try
+        {
+            while (true)
             {
-                while (true)
+                await Task.Delay(1, token);
+
+                now = this.GetCurrentTime();
+
+                elapsed = now - this.Base;
+                if (elapsed >= timeout)
                 {
-                    await Task.Delay(1, token);
-
-                    now = this.GetCurrentTime();
-
-                    elapsed = now - this.Base;
-                    if (elapsed >= timeout)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
-            catch (OperationCanceledException)
-            {
-                return false;
-            }
+        }
+        catch (OperationCanceledException)
+        {
+            return false;
         }
     }
 }
