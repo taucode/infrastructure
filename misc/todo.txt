@@ -1,4 +1,8 @@
 2020-10-11
 ==========
-    1. Handy time machine for debugging.
++   1. Handy time machine for debugging.
 
+2022-08-08
+==========
+    1. Unify Microsoft.Extensions.Logging.Abstractions vs Serilog.
+    

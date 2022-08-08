@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace TauCode.Infrastructure.Time;
 
-namespace TauCode.Infrastructure.Time
+public interface ITimeProvider
 {
-    public interface ITimeProvider
-    {
-        DateTimeOffset GetCurrentTime();
+    DateTimeOffset GetCurrentTime();
 
-        DateTimeOffset GetCurrentDate();
-    }
+    DateTimeOffset GetCurrentDate();
 }
