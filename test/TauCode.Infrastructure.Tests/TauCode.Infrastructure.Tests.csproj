@@ -28,7 +28,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="TauCode.Extensions" Version="1.7.0" />
+    <PackageReference Include="TauCode.Extensions" Version="1.8.1-alpha.1.2023-04-06.11-19" />
   </ItemGroup>
 
   <ItemGroup>
