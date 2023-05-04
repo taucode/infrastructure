@@ -208,10 +208,8 @@ public abstract class HasherBase : IHasher
         Array.Copy(_salt, allBytes, _salt.Length);
         Array.Copy(bytes, 0, allBytes, _salt.Length, bytes.Length);
 
-        using (var algorithm = this.CreateAlgorithm())
-        {
-            return algorithm.ComputeHash(allBytes);
-        }
+        using var algorithm = this.CreateAlgorithm();
+        return algorithm.ComputeHash(allBytes);
     }
 
     public byte[] GetHash(Stream stream)
@@ -221,11 +219,9 @@ public abstract class HasherBase : IHasher
             throw new ArgumentNullException(nameof(stream));
         }
 
-        using (var algorithm = this.CreateAlgorithm())
-        using (var saltedStream = new SaltedStream(stream, _salt))
-        {
-            return algorithm.ComputeHash(saltedStream);
-        }
+        using var algorithm = this.CreateAlgorithm();
+        using var saltedStream = new SaltedStream(stream, _salt);
+        return algorithm.ComputeHash(saltedStream);
     }
 
     public Guid GetHashGuid(string s) => LeadingBytesToGuid(this.GetHash(s));
