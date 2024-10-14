@@ -57,7 +57,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 
@@ -95,7 +95,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 
@@ -124,7 +124,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 
@@ -153,7 +153,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 
@@ -182,7 +182,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));        
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 
@@ -211,7 +211,7 @@ public class HasherTests
             expectedHashGuid = new Guid(expectedHash.Take(16).ToArray());
         }
 
-        CollectionAssert.AreEqual(expectedHash, hash);
+        Assert.That(expectedHash, Is.EqualTo(hash));
         Assert.That(hashGuid, Is.EqualTo(expectedHashGuid));
     }
 }

@@ -1,12 +1,11 @@
 ﻿using Serilog.Core;
 using Serilog.Events;
-using System.Text;
 
 namespace TauCode.Infrastructure.Logging;
 
 public class ObjectTagEnricher : ILogEventEnricher
 {
-    private const string PropertyName = "ObjectTag";
+    protected const string PropertyName = "ObjectTag";
     private readonly Func<ObjectTag> _tagGetter;
 
     private ObjectTag? _lastTag;
@@ -44,25 +43,15 @@ public class ObjectTagEnricher : ILogEventEnricher
 
     protected virtual LogEventProperty BuildProperty(ObjectTag tag, ILogEventPropertyFactory propertyFactory)
     {
-        var sb = new StringBuilder();
-        sb.Append(" (");
-        if (tag.Type != null!)
+        var items = new[]
         {
-            sb.Append(tag.Type);
-            if (tag.Name != null)
-            {
-                sb.Append(" ");
-            }
-        }
+            tag.Type,
+            tag.Name,
+            tag.State,
+        };
 
-        if (tag.Name != null)
-        {
-            sb.Append($"'{tag.Name}'");
-        }
+        var text = $"({string.Join(", ", items.Where(x => x != null))})";
 
-        sb.Append(")");
-
-        var text = sb.ToString();
         var property = propertyFactory.CreateProperty(PropertyName, text);
 
         return property;
