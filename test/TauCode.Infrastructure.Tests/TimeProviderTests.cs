@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using TauCode.Infrastructure.Time;
+using TimeProvider = TauCode.Infrastructure.Time.TimeProvider;
 
 namespace TauCode.Infrastructure.Tests;
 

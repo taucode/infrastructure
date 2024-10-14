@@ -24,6 +24,6 @@ public class TextTokenGeneratorTests
         var token = generator.Generate(100);
 
         // Assert
-        Assert.Pass(token, Has.Length.EqualTo(100));
+        Assert.That(token, Has.Length.EqualTo(100));
     }
 }

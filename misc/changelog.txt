@@ -1,50 +1,56 @@
+2024-10-14
+==========
+    1. Resurrected.
+    2. Ported to .NET 8
+
 2023-05-05
 ==========
     1. Added correlation id support.
 
-2019-07-06
+2023-04-08
 ==========
-    1. Ported to .NET Standard
+    1. Ported from lab.
 
-2019-10-20
+2023-01-23
 ==========
-    1. Release v3.0.
-
-2019-11-22
-==========
-    Version 3.0.0.1
-    1. Updated project structure.
-
-2020-10-11
-==========
-    1. Version is changed to 1.3.2-dev-* (Now hosting at Azure DevOps and NuGet.org)
-    2. Complete refactoring of TauCode libs touched this project, too.
-
-2021-03-01
-==========
-    1. Resurrection.
-
-2021-03-29
-==========
-    1. Added logging and time machine.
-
-2021-03-29
-==========
-    1. Small improvements to StringLogger.
-
-2022-07-27
-==========
-    1. Release 1.3.7.
+    1. Winter resurrection - 2023.
 
 2022-08-08
 ==========
     1. Moved to .NET 6.
     2. Released 1.5.0
 
-2023-01-23
+2022-07-27
 ==========
-    1. Winter resurrection - 2023.
+    1. Release 1.3.7.
 
-2023-04-08
+2021-03-29
 ==========
-    1. Ported from lab.
+    1. Small improvements to StringLogger.
+
+2021-03-29
+==========
+    1. Added logging and time machine.
+
+2021-03-01
+==========
+    1. Resurrection.
+
+2020-10-11
+==========
+    1. Version is changed to 1.3.2-dev-* (Now hosting at Azure DevOps and NuGet.org)
+    2. Complete refactoring of TauCode libs touched this project, too.
+
+2019-11-22
+==========
+    Version 3.0.0.1
+    1. Updated project structure.
+
+2019-10-20
+==========
+    1. Release v3.0.
+
+2019-07-06
+==========
+    1. Ported to .NET Standard
+
